@@ -24,11 +24,7 @@ rightArrwBtn.addEventListener("click",function(){
 })
 
 leftArrwBtn.addEventListener("click",function(){
-    if(document.querySelector(`[src="${changableAttr}"]`).parentElement.previousElementSibling)
-        changableAttr=document.querySelector(`[src="${changableAttr}"]`).parentElement.previousElementSibling.children[0].getAttribute("src");                 
-    else
-        changableAttr=document.querySelector(".all-images").lastElementChild.children[0].getAttribute("src");
-    changeImgSrcAttr(changableAttr);
+    prevSlide();
 })
 
 function nextSlide()
@@ -37,6 +33,15 @@ function nextSlide()
         changableAttr=document.querySelector(`[src="${changableAttr}"]`).parentElement.nextElementSibling.children[0].getAttribute("src");                 
     else
         changableAttr=document.querySelector(".all-images").children[0].children[0].getAttribute("src");
+    changeImgSrcAttr(changableAttr);
+}
+
+function prevSlide()
+{
+    if(document.querySelector(`[src="${changableAttr}"]`).parentElement.previousElementSibling)
+        changableAttr=document.querySelector(`[src="${changableAttr}"]`).parentElement.previousElementSibling.children[0].getAttribute("src");                 
+    else
+        changableAttr=document.querySelector(".all-images").lastElementChild.children[0].getAttribute("src");
     changeImgSrcAttr(changableAttr);
 }
 
@@ -55,6 +60,10 @@ document.addEventListener("click", function(e){
 addEventListener('keydown', (e) => {
     if (e.key === "Escape")
         closePopup();
+    else if (e.key === "ArrowRight")
+        nextSlide();
+    else if(e.key === "ArrowLeft")
+        prevSlide();
 });
 
 exitBtn.addEventListener("click",closePopup);
